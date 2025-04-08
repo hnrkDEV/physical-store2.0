@@ -16,7 +16,7 @@ export class StoresService {
   }
 
   async createStore(dto: CreateStoreDto): Promise<Store> {
-    this.logger.log(`Criando nova loja: ${dto.storeName}`);
+    this.logger.log(`Creating new store: ${dto.storeName}`);
     return this.storesRepository.create(dto);
   }
   
