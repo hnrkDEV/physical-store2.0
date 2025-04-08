@@ -2,6 +2,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { Store } from '../interfaces/store.interface';
+import { CreateStoreDto } from '../dto/create-store.dto';
 
 @Injectable()
 export class StoresRepository {
@@ -10,4 +11,10 @@ export class StoresRepository {
   async findAll(): Promise<Store[]> {
     return this.storeModel.find().exec();
   }
+
+  async create(storeData: CreateStoreDto): Promise<Store> {
+    const createdStore = new this.storeModel(storeData);
+    return createdStore.save();
+  }
+  
 }

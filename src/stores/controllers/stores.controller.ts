@@ -1,6 +1,7 @@
-import { Controller, Get, Logger } from '@nestjs/common';
+import { Body, Controller, Get, Logger, Post } from '@nestjs/common';
 import { StoresService } from '../services/stores.service';
 import { Store } from '../interfaces/store.interface';
+import { CreateStoreDto } from '../dto/create-store.dto';
 
 @Controller('stores')
 export class StoresController {
@@ -10,7 +11,7 @@ export class StoresController {
 
   @Get()
   async findAll(): Promise<{ stores: Store[]; limit: number; offset: number; total: number }> {
-    this.logger.log('Recebida requisição GET /stores');
+    this.logger.log('Request Received GET /stores');
 
     const stores = await this.storesService.getAllStores();
 
@@ -20,5 +21,11 @@ export class StoresController {
       offset: 1,
       total: stores.length,
     };
+  }
+
+  @Post()
+  async create(@Body() dto: CreateStoreDto): Promise<Store> {
+    this.logger.log(`POST /stores - Creating store: ${dto.storeName}`);
+    return this.storesService.createStore(dto);
   }
 }
