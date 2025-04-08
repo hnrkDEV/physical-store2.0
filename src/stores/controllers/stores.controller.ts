@@ -11,7 +11,7 @@ export class StoresController {
 
   @Get()
   async findAll(): Promise<{ stores: Store[]; limit: number; offset: number; total: number }> {
-    this.logger.log('Recebida requisição GET /stores');
+    this.logger.log('Request Received GET /stores');
 
     const stores = await this.storesService.getAllStores();
 
