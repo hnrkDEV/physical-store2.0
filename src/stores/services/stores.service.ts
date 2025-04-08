@@ -1,6 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { StoresRepository } from '../repositories/stores.repository';
 import { Store } from '../interfaces/store.interface';
+import { CreateStoreDto } from '../dto/create-store.dto';
 @Injectable()
 export class StoresService {
   private readonly logger = new Logger(StoresService.name);
@@ -13,4 +14,10 @@ export class StoresService {
     this.logger.log(`${stores.length} Stores`);
     return stores;
   }
+
+  async createStore(dto: CreateStoreDto): Promise<Store> {
+    this.logger.log(`Criando nova loja: ${dto.storeName}`);
+    return this.storesRepository.create(dto);
+  }
+  
 }
