@@ -19,5 +19,5 @@ export class StoresService {
     this.logger.log(`Creating new store: ${dto.storeName}`);
     return this.storesRepository.create(dto);
   }
-  
+ 
 }
