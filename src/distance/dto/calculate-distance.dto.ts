@@ -1,10 +1,13 @@
+import { ApiProperty } from '@nestjs/swagger';
+import { CoordinateDto } from '../../geo/dto/coordinate.dto';
+
 export class CalculateDistanceDto {
-  userCoordinates: {
-    lat: number;
-    lon: number;
-  };
-  storeCoordinates: {
-    lat: number;
-    lon: number;
-  }[];
+  @ApiProperty({ type: CoordinateDto, description: 'User location coordinates' })
+  userCoordinates: CoordinateDto;
+
+  @ApiProperty({
+    type: [CoordinateDto],
+    description: 'Array of store coordinates'
+  })
+  storeCoordinates: CoordinateDto[];
 }
