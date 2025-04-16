@@ -16,5 +16,13 @@ export class StoresRepository {
     const createdStore = new this.storeModel(storeData);
     return createdStore.save();
   }
+
+  async findById(id: string): Promise<Store | null> {
+    return this.storeModel.findById(id).exec();
+  }
+
+  async findByState(uf: string): Promise<Store[]> {
+    return this.storeModel.find({ state: uf.toUpperCase() }).exec();
+  }
   
 }

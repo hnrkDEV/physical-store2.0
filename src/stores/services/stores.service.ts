@@ -19,5 +19,12 @@ export class StoresService {
     this.logger.log(`Creating new store: ${dto.storeName}`);
     return this.storesRepository.create(dto);
   }
- 
+
+  async getStoreById(id: string): Promise<Store | null> {
+    return this.storesRepository.findById(id);
+  }
+
+  async getStoresByState(uf: string): Promise<Store[]> {
+    return this.storesRepository.findByState(uf);
+  }
 }

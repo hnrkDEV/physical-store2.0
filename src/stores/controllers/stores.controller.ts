@@ -1,4 +1,4 @@
-import { Controller, Get, Query, Post, Body, Logger } from '@nestjs/common';
+import { Controller, Get, Query, Post, Body, Logger, Param, NotFoundException } from '@nestjs/common';
 import { StoresService } from '../services/stores.service';
 import { CreateStoreDto } from '../dto/create-store.dto';
 import { Store } from '../interfaces/store.interface';
@@ -20,16 +20,22 @@ export class StoresController {
   ) {}
 
   @Get()
-  async findAll(): Promise<{ stores: Store[]; limit: number; offset: number; total: number }> {
-    const stores = await this.storesService.getAllStores();
-    return {
-      stores,
-      limit: 1,
-      offset: 1,
-      total: stores.length,
-    };
-  }
-  
+  @ApiQuery({ name: 'uf', required: false, example: 'PE', description: 'Optional state filter (UF)' })
+  @ApiResponse({ status: 200, description: 'Returns all stores, or filters by state if UF is provided' })
+  async findAll(@Query('uf') uf?: string): Promise<{ stores: Store[]; total: number }> {
+  let stores: Store[];
+  if (uf) {
+    this.logger.log(`Filtering stores by state: ${uf}`);
+    stores = await this.storesService.getStoresByState(uf);
+    }else {
+      stores = await this.storesService.getAllStores();
+    } 
+  return {
+    stores,
+    total: stores.length,
+  };
+}
+
   @Post()
   async create(@Body() dto: CreateStoreDto): Promise<Store> {
     this.logger.log(`POST /stores - Creating store: ${dto.storeName}`);
@@ -114,5 +120,21 @@ export class StoresController {
       })),
       total: stores.length,
     };
+    
   }
+  @Get(':id')
+  @ApiParam({ name: 'id', description: 'Store ID' })
+  @ApiResponse({ status: 200, description: 'Store found' })
+  @ApiResponse({ status: 404, description: 'Store not found' })
+  async getStoreById(@Param('id') id: string) {
+    const store = await this.storesService.getStoreById(id);
+  
+    if (!store) {
+      throw new NotFoundException(`Store with ID ${id} not found`);
+    }
+  
+    return store;
+  }
+  
+  
 }
