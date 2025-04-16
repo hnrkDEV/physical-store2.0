@@ -5,7 +5,9 @@ import { Store } from '../interfaces/store.interface';
 import { GeoService } from '../../geo/geo.service';
 import { DistanceService } from '../../distance/distance.service';
 import { MelhorEnvioService } from '../../melhor-envio/melhor-envio.service';
+import { ApiTags, ApiQuery, ApiParam, ApiResponse } from '@nestjs/swagger';
 
+@ApiTags('Stores')
 @Controller('stores')
 export class StoresController {
   private readonly logger = new Logger(StoresController.name);
@@ -27,19 +29,23 @@ export class StoresController {
       total: stores.length,
     };
   }
-
+  
   @Post()
   async create(@Body() dto: CreateStoreDto): Promise<Store> {
     this.logger.log(`POST /stores - Creating store: ${dto.storeName}`);
     return this.storesService.createStore(dto);
   }
 
+  @ApiQuery({ name: 'cep', required: true, example: '52051-050', description: 'User postal code (CEP)' })
+  @ApiResponse({ status: 200, description: 'Returns geolocation coordinates from CEP' })
   @Get('user-location')
   async getLocation(@Query('cep') cep: string) {
     this.logger.log(`CEP Received ${cep}`);
     return this.geoService.getCoordinatesFromCep(cep);
   }
 
+  @ApiQuery({ name: 'cep', required: true, example: '52051-050', description: 'User postal code (CEP)' })
+  @ApiResponse({ status: 200, description: 'Stores list with delivery options based on distance and Melhor Envio.' })
   @Get('by-cep')
   async getStoresByCep(@Query('cep') cep: string) {
     const { coordinates } = await this.geoService.getCoordinatesFromCep(cep);
@@ -106,8 +112,6 @@ export class StoresController {
         },
         title: store.storeName,
       })),
-      limit: 1,
-      offset: 1,
       total: stores.length,
     };
   }
