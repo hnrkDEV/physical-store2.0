@@ -1,12 +1,12 @@
 
-# 🛒 Physical Store 2.0
+# Physical Store 2.0
 
 > **Backend system to find the nearest physical stores based on a postal code, calculate shipping costs, and return store and delivery information.**  
 > Challenge PB DEZ24 - Compass UOL
 
 ---
 
-## 🚀 Technologies
+## Technologies
 
 - **Node.js**
 - **NestJS**
@@ -19,9 +19,9 @@
 
 ---
 
-## 📌 Features
+## Features
 
-### ✅ Implemented Endpoints
+### Implemented Endpoints
 
 | Route                     | Method | Description                                              |
 |--------------------------|--------|----------------------------------------------------------|
@@ -33,7 +33,7 @@
 
 ---
 
-### 🔍 External APIs Integrated
+### External APIs Integrated
 
 | Service                  | Purpose                                            |
 |--------------------------|----------------------------------------------------|
@@ -44,9 +44,9 @@
 
 ---
 
-## 🧪 Unit Testing
+## Unit Testing
 
-✅ **Unit Tests Fully Implemented** for:
+**Unit Tests Fully Implemented** for:
 
 - Services:
   - `StoresService`
@@ -58,7 +58,7 @@
 - Controller:
   - `StoresController`
 
-📊 Run the tests:
+Run the tests:
 
 ```bash
 npm run test
@@ -66,7 +66,7 @@ npm run test
 
 ---
 
-## 📚 Swagger API Documentation
+## Swagger API Documentation
 
 Access via:  
 ```
@@ -77,7 +77,7 @@ Generated with `@nestjs/swagger`.
 
 ---
 
-## 💻 How to Run Locally
+## How to Run Locally
 
 ```bash
 # Install dependencies
@@ -92,7 +92,7 @@ npm run start:dev
 
 ---
 
-## 🧾 Environment Variables
+## Environment Variables
 
 Your `.env` should include:
 
