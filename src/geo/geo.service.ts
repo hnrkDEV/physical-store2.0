@@ -12,7 +12,7 @@ export class GeoService {
 
   async getCoordinatesFromCep(cep: string) {
     const address = await this.viaCep.getAddressByCep(cep);
-    const fullAddress = `${address.logradouro}, ${address.localidade}, ${address.uf}`;
+    const fullAddress = `${address.logradouro}, ${address.localidade}, ${address.uf}, Brasil`;
 
     const coordinates = await this.googleMaps.getCoordinatesFromAddress(fullAddress);
     return {
