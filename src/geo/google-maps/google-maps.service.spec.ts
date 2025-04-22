@@ -64,7 +64,7 @@ describe('GoogleMapsService', () => {
   });
 
   it('should throw HttpException if address not found', async () => {
-    const address = 'Endereço Inexistente, Teste';
+    const address = 'Non-Existent Address, Test';
 
     const mockResponse = {
       data: {
