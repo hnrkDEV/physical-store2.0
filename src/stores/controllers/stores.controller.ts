@@ -4,7 +4,7 @@ import { CreateStoreDto } from '../dto/create-store.dto';
 import { Store } from '../interfaces/store.interface';
 import { GeoService } from '../../geo/geo.service';
 import { DistanceService } from '../../distance/distance.service';
-import { MelhorEnvioService } from '../../melhor-envio/melhor-envio.service';
+import { MelhorEnvioService } from '../../geo/melhor-envio/melhor-envio.service';
 import { ApiTags, ApiQuery, ApiParam, ApiResponse } from '@nestjs/swagger';
 
 @ApiTags('Stores')

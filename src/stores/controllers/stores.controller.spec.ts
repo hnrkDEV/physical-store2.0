@@ -3,7 +3,7 @@ import { StoresController } from './stores.controller';
 import { StoresService } from '../services/stores.service';
 import { GeoService } from '../../geo/geo.service';
 import { DistanceService } from '../../distance/distance.service';
-import { MelhorEnvioService } from '../../melhor-envio/melhor-envio.service';
+import { MelhorEnvioService } from '../../geo/melhor-envio/melhor-envio.service';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 
 describe('StoresController', () => {

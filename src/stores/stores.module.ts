@@ -8,7 +8,7 @@ import { GeoModule } from 'src/geo/geo.module';
 import { WinstonModule } from 'nest-winston';
 import { winstonConfig } from 'src/log/logger.service';
 import { DistanceModule } from 'src/distance/distance.module';
-import { MelhorEnvioModule } from '../melhor-envio/melhor-envio.module'
+import { MelhorEnvioModule } from '../geo/melhor-envio/melhor-envio.module'
 
 
 
